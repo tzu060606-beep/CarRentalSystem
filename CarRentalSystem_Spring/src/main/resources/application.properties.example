@@ -1,0 +1,48 @@
+spring.application.name=CarRentalSystem_Spring
+
+# Server Port
+server.port=8081
+
+# MS SQL Server (請填入自己的資料庫資訊)
+spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=car_rental_db;encrypt=false
+spring.datasource.username=YOUR_DB_USERNAME
+spring.datasource.password=YOUR_DB_PASSWORD
+spring.datasource.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+#Spring JPA Setting:
+spring.jpa.database-platform=org.hibernate.dialect.SQLServerDialect
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# Google OAuth2 (請到 Google Cloud Console 取得)
+spring.security.oauth2.client.registration.google.client-id=YOUR_GOOGLE_CLIENT_ID
+spring.security.oauth2.client.registration.google.client-secret=YOUR_GOOGLE_CLIENT_SECRET
+spring.security.oauth2.client.registration.google.scope=https://www.googleapis.com/auth/calendar.events,profile,email
+spring.security.oauth2.client.registration.google.redirect-uri={baseUrl}/login/oauth2/code/{registrationId}
+spring.security.oauth2.client.registration.google.authorization-grant-type=authorization_code
+
+# 綠界金流 AIO 配置 (請填入自己的測試商店資訊)
+ecpay.payment.merchant-id=YOUR_MERCHANT_ID
+ecpay.payment.hash-key=YOUR_HASH_KEY
+ecpay.payment.hash-iv=YOUR_HASH_IV
+ecpay.payment.url=https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5
+
+# 綠界電子發票 B2C 配置
+ecpay.invoice.merchant-id=YOUR_MERCHANT_ID
+ecpay.invoice.hash-key=YOUR_HASH_KEY
+ecpay.invoice.hash-iv=YOUR_HASH_IV
+ecpay.invoice.url=https://einvoice-stage.ecpay.com.tw/B2CInvoice/Issue
+
+# 綠界國內物流配置
+ecpay.logistics.merchant-id=YOUR_MERCHANT_ID
+ecpay.logistics.hash-key=YOUR_HASH_KEY
+ecpay.logistics.hash-iv=YOUR_HASH_IV
+ecpay.logistics.url=https://logistics-stage.ecpay.com.tw/Express/Create
+
+# Gmail SMTP (請使用 Google App Password)
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=YOUR_EMAIL@gmail.com
+spring.mail.password=YOUR_APP_PASSWORD
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true

@@ -1,0 +1,15 @@
+# IDE / 編輯器
+.metadata/
+.vscode/
+.idea/
+
+# 作業系統
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# 壓縮檔
+*.7z
+
+# 不需要的 Spring 設定殘留
+CarRentalSystem_Vue/src/main/

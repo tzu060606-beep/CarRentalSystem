@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    // 讓 VS Code 模擬 Vite 的解析邏輯 (保留，非常重要)
+    "moduleResolution": "Bundler",
+    
+    // 允許在路徑中使用現代模組語法 (保留)
+    "module": "ESNext",
+    
+    // 路徑別名設定 (保留，解決找不到檔案的核心)
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    
+    "allowJs": true,
+    
+    // [關鍵修改] 關閉嚴格檢查！這會消除那個討厭的 any 報錯
+    "checkJs": false, 
+    
+    "noEmit": true
+  },
+  "exclude": ["node_modules", "dist"]
+}

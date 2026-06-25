@@ -1,0 +1,628 @@
+/*
+ * bootstrap-bridge-3.css
+ * OneRent — Bootstrap 5 變數覆寫橋接檔
+ * 依據 OneRent CIS 品牌識別系統 v1.0 制定
+ *
+ * 用途：
+ *   透過覆寫 Bootstrap 5 的 --bs-* 變數與選擇器，讓所有 Bootstrap
+ *   元件自動套用 OneRent 品牌設計。
+ *
+ * 前提：
+ *   all.css 的 import 順序必須是：
+ *   1. variables-3.css        ← 先定義我們自己的變數
+ *   2. bootstrap-bridge-3.css ← 這支檔案
+ *   3. base.css、component/   ← 其餘自訂樣式
+ *
+ * ⚠️ 規則：
+ *   - 不在這裡定義任何顏色值，顏色統一在 variables-3.css 管理
+ *   - 不在這裡寫自訂元件樣式，那些放在 component/ 資料夾
+ *   - 模組若新增了擴充狀態色，請在下方「擴充 Badge」區塊補上覆寫
+ *
+ * 重要說明：
+ *   Bootstrap 的 .btn-*、.badge 等顏色與字體大小定義在各自選擇器
+ *   內部，不受 :root 變數影響，必須用選擇器逐一覆寫。
+ * ================================================================ */
+
+:root {
+
+  /* ================================================================
+     主色橋接（primary = Sapphire #0150AD）
+     ================================================================ */
+
+  --bs-primary:                   var(--color-primary);
+  --bs-primary-rgb:               1, 80, 173;
+  --bs-primary-bg-subtle:         var(--color-primary-light);
+  --bs-primary-border-subtle:     var(--color-primary-border-light);
+  --bs-primary-text-emphasis:     var(--color-primary-hover);
+
+  /* secondary = 淺藍 #60A5FA */
+  --bs-secondary:                 var(--color-secondary);
+  --bs-secondary-rgb:             96, 165, 250;
+  --bs-secondary-bg-subtle:       var(--color-secondary-light);
+
+  --bs-success:                   var(--color-success);
+  --bs-success-rgb:               22, 163, 74;
+  --bs-success-bg-subtle:         var(--color-success-bg);
+  --bs-success-text-emphasis:     var(--color-success-hover);
+
+  --bs-danger:                    var(--color-danger);
+  --bs-danger-rgb:                217, 0, 32;
+  --bs-danger-bg-subtle:          var(--color-danger-bg);
+  --bs-danger-text-emphasis:      var(--color-danger-hover);
+
+  --bs-warning:                   var(--color-warning);
+  --bs-warning-rgb:               234, 179, 8;
+  --bs-warning-bg-subtle:         var(--color-warning-bg);
+  --bs-warning-text-emphasis:     var(--color-warning-hover);
+
+  /* info = Teal 青綠，與主色藍明確區隔 */
+  --bs-info:                      var(--color-info);
+  --bs-info-rgb:                  13, 148, 136;
+  --bs-info-bg-subtle:            var(--color-info-bg);
+  --bs-info-text-emphasis:        var(--color-info-hover);
+
+
+  /* ================================================================
+     文字與背景橋接
+     ================================================================ */
+
+  --bs-body-font-family:          var(--font-sans);
+  --bs-body-font-size:            var(--text-sm);
+  --bs-body-line-height:          var(--leading-loose);
+  --bs-body-font-weight:          var(--font-normal);
+  --bs-body-color:                var(--color-text-primary);
+  --bs-body-bg:                   var(--color-bg-page);
+  --bs-secondary-color:           var(--color-text-secondary);
+  --bs-tertiary-color:            var(--color-text-muted);
+  --bs-secondary-bg:              var(--color-bg-sunken);
+  --bs-tertiary-bg:               var(--color-gray-100);
+  --bs-heading-color:             var(--color-text-primary);
+
+  /* <code> 顏色橋接：Bootstrap 預設為粉紅色，覆寫為主色藍 */
+  --bs-code-color:                var(--color-primary);
+
+
+  /* ================================================================
+     邊框橋接
+     ================================================================ */
+
+  --bs-border-color:              var(--color-border);
+  --bs-border-color-translucent:  rgba(1, 80, 173, 0.08);
+  --bs-border-width:              0.5px;
+
+
+  /* ================================================================
+     圓角橋接
+     ================================================================ */
+
+  --bs-border-radius:             var(--radius-md);
+  --bs-border-radius-sm:          var(--radius-sm);
+  --bs-border-radius-lg:          var(--radius-lg);
+  --bs-border-radius-xl:          var(--radius-xl);
+  --bs-border-radius-pill:        var(--radius-full);
+
+
+  /* ================================================================
+     陰影橋接
+     ================================================================ */
+
+  --bs-box-shadow-sm:             var(--shadow-sm);
+  --bs-box-shadow:                var(--shadow-md);
+  --bs-box-shadow-lg:             var(--shadow-lg);
+
+
+  /* ================================================================
+     連結色橋接
+     ================================================================ */
+
+  --bs-link-color:                var(--color-text-link);
+  --bs-link-color-rgb:            1, 80, 173;
+  --bs-link-hover-color:          var(--color-text-link-hover);
+  --bs-link-decoration:           none;
+
+
+  /* ================================================================
+     按鈕通用外形橋接（顏色在下方選擇器區塊處理）
+     ================================================================ */
+
+  --bs-btn-font-family:           var(--font-sans);
+  --bs-btn-font-size:             var(--text-sm);
+  --bs-btn-font-weight:           var(--font-medium);
+  --bs-btn-line-height:           1;
+  --bs-btn-border-radius:         var(--radius-md);
+  --bs-btn-transition:            all var(--transition-fast);
+
+
+  /* ================================================================
+     表單橋接
+     ================================================================ */
+
+  --bs-form-control-bg:           var(--color-bg-surface);
+  --bs-form-control-color:        var(--color-text-primary);
+  --bs-form-control-border-color: var(--color-border);
+  --bs-focus-ring-color:          rgba(1, 80, 173, 0.15);
+  --bs-focus-ring-width:          3px;
+
+
+  /* ================================================================
+     表格橋接
+     ================================================================ */
+
+  --bs-table-bg:                  transparent;
+  --bs-table-striped-bg:          var(--color-gray-50);
+  --bs-table-hover-bg:            var(--color-primary-light);
+  --bs-table-border-color:        var(--color-border);
+  --bs-table-color:               var(--color-text-primary);
+
+
+  /* ================================================================
+     Modal 橋接
+     ================================================================ */
+
+  --bs-modal-bg:                  var(--color-bg-surface);
+  --bs-modal-border-color:        var(--color-border);
+  --bs-modal-border-radius:       var(--radius-lg);
+  --bs-modal-box-shadow:          var(--shadow-md);
+  --bs-modal-backdrop-bg:         #0B1A30;
+  --bs-modal-backdrop-opacity:    0.5;
+  --bs-modal-header-border-color: var(--color-border);
+  --bs-modal-footer-border-color: var(--color-border);
+
+
+  /* ================================================================
+     Dropdown 橋接
+     ================================================================ */
+
+  --bs-dropdown-bg:               var(--color-bg-surface);
+  --bs-dropdown-border-color:     var(--color-border);
+  --bs-dropdown-border-radius:    var(--radius-md);
+  --bs-dropdown-box-shadow:       var(--shadow-md);
+  --bs-dropdown-link-color:       var(--color-text-primary);
+  --bs-dropdown-link-hover-color: var(--color-primary);
+  --bs-dropdown-link-hover-bg:    var(--color-primary-light);
+  --bs-dropdown-link-active-color: var(--color-text-inverse);
+  --bs-dropdown-link-active-bg:   var(--color-primary);
+  --bs-dropdown-divider-bg:       var(--color-border);
+
+
+  /* ================================================================
+     Card 橋接
+     ================================================================ */
+
+  --bs-card-bg:                   var(--color-bg-surface);
+  --bs-card-border-color:         var(--color-border);
+  --bs-card-border-width:         0.5px;
+  --bs-card-border-radius:        var(--radius-lg);
+  --bs-card-box-shadow:           var(--shadow-sm);
+  --bs-card-spacer-y:             var(--space-6);
+  --bs-card-spacer-x:             var(--space-6);
+  --bs-card-title-color:          var(--color-text-primary);
+  --bs-card-subtitle-color:       var(--color-text-secondary);
+
+
+  /* ================================================================
+     Navbar 橋接
+     ================================================================ */
+
+  --bs-navbar-color:              var(--color-text-primary);
+  --bs-navbar-hover-color:        var(--color-primary);
+  --bs-navbar-active-color:       var(--color-primary);
+  --bs-navbar-brand-color:        var(--color-primary);
+  --bs-navbar-brand-hover-color:  var(--color-primary-hover);
+  --bs-navbar-toggler-border-color: var(--color-border);
+
+
+  /* ================================================================
+     Pagination 橋接
+     ================================================================ */
+
+  --bs-pagination-color:                var(--color-primary);
+  --bs-pagination-bg:                   var(--color-bg-surface);
+  --bs-pagination-border-color:         var(--color-border);
+  --bs-pagination-hover-color:          var(--color-primary);
+  --bs-pagination-hover-bg:             var(--color-primary-light);
+  --bs-pagination-hover-border-color:   var(--color-border);
+  --bs-pagination-active-color:         var(--color-text-inverse);
+  --bs-pagination-active-bg:            var(--color-primary);
+  --bs-pagination-active-border-color:  var(--color-primary);
+  --bs-pagination-disabled-color:       var(--color-text-muted);
+  --bs-pagination-border-radius:        var(--radius-md);
+
+
+  /* ================================================================
+     Tooltip / Popover 橋接
+     ================================================================ */
+
+  --bs-tooltip-bg:                var(--color-blue-900);
+  --bs-tooltip-color:             var(--color-text-inverse);
+  --bs-tooltip-border-radius:     var(--radius-sm);
+  --bs-popover-bg:                var(--color-bg-surface);
+  --bs-popover-border-color:      var(--color-border);
+  --bs-popover-border-radius:     var(--radius-lg);
+  --bs-popover-box-shadow:        var(--shadow-md);
+
+}
+
+
+/* ================================================================
+   按鈕顏色覆寫（Button Color Overrides）
+   Bootstrap 的 .btn-* 顏色定義在選擇器內部，不受 :root 影響。
+
+   disabled 文字統一用 --color-blue-200（淺藍），
+   讓 disabled 狀態視覺上明顯和正常狀態區隔。
+   ================================================================ */
+
+.btn-primary {
+  --bs-btn-bg:                    var(--color-primary);
+  --bs-btn-border-color:          var(--color-primary-border);
+  --bs-btn-color:                 var(--color-text-inverse);
+  --bs-btn-hover-bg:              var(--color-primary-hover);
+  --bs-btn-hover-border-color:    var(--color-primary-hover);
+  --bs-btn-hover-color:           var(--color-text-inverse);
+  --bs-btn-active-bg:             var(--color-primary-active);
+  --bs-btn-active-border-color:   var(--color-primary-active);
+  --bs-btn-active-color:          var(--color-text-inverse);
+  --bs-btn-disabled-bg:           var(--color-primary);
+  --bs-btn-disabled-border-color: var(--color-primary);
+  --bs-btn-disabled-color:        var(--color-blue-200);   /* 淺藍文字，明顯像停用 */
+}
+
+.btn-secondary {
+  --bs-btn-bg:                    var(--color-secondary);
+  --bs-btn-border-color:          var(--color-secondary-border);
+  --bs-btn-color:                 var(--color-text-inverse);
+  --bs-btn-hover-bg:              var(--color-secondary-hover);
+  --bs-btn-hover-border-color:    var(--color-secondary-hover);
+  --bs-btn-hover-color:           var(--color-text-inverse);
+  --bs-btn-active-bg:             var(--color-secondary-active);
+  --bs-btn-active-border-color:   var(--color-secondary-active);
+  --bs-btn-active-color:          var(--color-text-inverse);
+  --bs-btn-disabled-bg:           var(--color-secondary);
+  --bs-btn-disabled-color:        var(--color-blue-200);
+}
+
+.btn-success {
+  --bs-btn-bg:                    var(--color-success);
+  --bs-btn-border-color:          var(--color-success);
+  --bs-btn-color:                 var(--color-text-inverse);
+  --bs-btn-hover-bg:              var(--color-success-hover);
+  --bs-btn-hover-border-color:    var(--color-success-hover);
+  --bs-btn-hover-color:           var(--color-text-inverse);
+  --bs-btn-active-bg:             var(--color-success-hover);
+  --bs-btn-active-border-color:   var(--color-success-hover);
+  --bs-btn-active-color:          var(--color-text-inverse);
+  --bs-btn-disabled-bg:           var(--color-success);
+  --bs-btn-disabled-color:        var(--color-green-200);
+}
+
+.btn-danger {
+  --bs-btn-bg:                    var(--color-danger);
+  --bs-btn-border-color:          var(--color-danger);
+  --bs-btn-color:                 var(--color-text-inverse);
+  --bs-btn-hover-bg:              var(--color-danger-hover);
+  --bs-btn-hover-border-color:    var(--color-danger-hover);
+  --bs-btn-hover-color:           var(--color-text-inverse);
+  --bs-btn-active-bg:             var(--color-danger-hover);
+  --bs-btn-active-border-color:   var(--color-danger-hover);
+  --bs-btn-active-color:          var(--color-text-inverse);
+  --bs-btn-disabled-bg:           var(--color-danger);
+  --bs-btn-disabled-color:        var(--color-red-200);
+}
+
+/* warning 文字用深色，黃底白字對比度不夠 */
+.btn-warning {
+  --bs-btn-bg:                    var(--color-warning);
+  --bs-btn-border-color:          var(--color-warning);
+  --bs-btn-color:                 var(--color-text-primary);
+  --bs-btn-hover-bg:              var(--color-warning-hover);
+  --bs-btn-hover-border-color:    var(--color-warning-hover);
+  --bs-btn-hover-color:           var(--color-text-primary);
+  --bs-btn-active-bg:             var(--color-warning-hover);
+  --bs-btn-active-border-color:   var(--color-warning-hover);
+  --bs-btn-active-color:          var(--color-text-primary);
+  --bs-btn-disabled-bg:           var(--color-warning);
+  --bs-btn-disabled-color:        var(--color-amber-200);
+}
+
+/* info = teal-500（#14B8A6），比 teal-600 亮一點，和其他按鈕視覺協調 */
+.btn-info {
+  --bs-btn-bg:                    var(--color-teal-500);
+  --bs-btn-border-color:          var(--color-teal-500);
+  --bs-btn-color:                 var(--color-text-inverse);
+  --bs-btn-hover-bg:              var(--color-info);       /* teal-600 */
+  --bs-btn-hover-border-color:    var(--color-info);
+  --bs-btn-hover-color:           var(--color-text-inverse);
+  --bs-btn-active-bg:             var(--color-info-hover); /* teal-700 */
+  --bs-btn-active-border-color:   var(--color-info-hover);
+  --bs-btn-active-color:          var(--color-text-inverse);
+  --bs-btn-disabled-bg:           var(--color-teal-500);
+  --bs-btn-disabled-color:        var(--color-teal-200);
+}
+
+.btn-outline-primary {
+  --bs-btn-bg:                    transparent;
+  --bs-btn-border-color:          var(--color-primary-border);
+  --bs-btn-color:                 var(--color-primary);
+  --bs-btn-hover-bg:              var(--color-primary);
+  --bs-btn-hover-border-color:    var(--color-primary);
+  --bs-btn-hover-color:           var(--color-text-inverse);
+  --bs-btn-active-bg:             var(--color-primary-hover);
+  --bs-btn-active-border-color:   var(--color-primary-hover);
+  --bs-btn-active-color:          var(--color-text-inverse);
+}
+
+.btn-outline-secondary {
+  --bs-btn-bg:                    transparent;
+  --bs-btn-border-color:          var(--color-secondary-border);
+  --bs-btn-color:                 var(--color-secondary);
+  --bs-btn-hover-bg:              var(--color-secondary);
+  --bs-btn-hover-border-color:    var(--color-secondary);
+  --bs-btn-hover-color:           var(--color-text-inverse);
+  --bs-btn-active-bg:             var(--color-secondary-hover);
+  --bs-btn-active-border-color:   var(--color-secondary-hover);
+  --bs-btn-active-color:          var(--color-text-inverse);
+}
+
+.btn-outline-success {
+  --bs-btn-bg:                    transparent;
+  --bs-btn-border-color:          var(--color-success);
+  --bs-btn-color:                 var(--color-success);
+  --bs-btn-hover-bg:              var(--color-success);
+  --bs-btn-hover-border-color:    var(--color-success);
+  --bs-btn-hover-color:           var(--color-text-inverse);
+  --bs-btn-active-bg:             var(--color-success-hover);
+  --bs-btn-active-border-color:   var(--color-success-hover);
+  --bs-btn-active-color:          var(--color-text-inverse);
+}
+
+.btn-outline-danger {
+  --bs-btn-bg:                    transparent;
+  --bs-btn-border-color:          var(--color-danger);
+  --bs-btn-color:                 var(--color-danger);
+  --bs-btn-hover-bg:              var(--color-danger);
+  --bs-btn-hover-border-color:    var(--color-danger);
+  --bs-btn-hover-color:           var(--color-text-inverse);
+  --bs-btn-active-bg:             var(--color-danger-hover);
+  --bs-btn-active-border-color:   var(--color-danger-hover);
+  --bs-btn-active-color:          var(--color-text-inverse);
+}
+
+.btn-outline-warning {
+  --bs-btn-bg:                    transparent;
+  --bs-btn-border-color:          var(--color-warning);
+  --bs-btn-color:                 var(--color-warning-hover);
+  --bs-btn-hover-bg:              var(--color-warning);
+  --bs-btn-hover-border-color:    var(--color-warning);
+  --bs-btn-hover-color:           var(--color-text-primary);
+  --bs-btn-active-bg:             var(--color-warning-hover);
+  --bs-btn-active-border-color:   var(--color-warning-hover);
+  --bs-btn-active-color:          var(--color-text-primary);
+}
+
+.btn-outline-info {
+  --bs-btn-bg:                    transparent;
+  --bs-btn-border-color:          var(--color-teal-500);
+  --bs-btn-color:                 var(--color-teal-500);
+  --bs-btn-hover-bg:              var(--color-teal-500);
+  --bs-btn-hover-border-color:    var(--color-teal-500);
+  --bs-btn-hover-color:           var(--color-text-inverse);
+  --bs-btn-active-bg:             var(--color-info);
+  --bs-btn-active-border-color:   var(--color-info);
+  --bs-btn-active-color:          var(--color-text-inverse);
+}
+
+
+/* ================================================================
+   Badge 覆寫（字體大小 + 框線 + 顏色）
+   Bootstrap 的 .badge 字體與顏色定義在選擇器內部，
+   :root 改了沒用，必須用選擇器直接覆寫。
+
+   框線規則：1px solid，同色系較淺的色（-light 色）。
+
+   ── 如何新增擴充 badge 色 ──
+   1. 在 variables-3.css 的「擴充狀態色區塊」新增三個變數
+   2. 在下方擴充色區塊補上對應的 .badge.bg-{名稱} 規則
+   ================================================================ */
+
+/* badge 通用字體與內距 */
+.badge {
+  font-size: var(--text-sm) !important;     /* 14px，若仍不生效請確認 base.css 的 font-size */
+  font-weight: var(--font-medium) !important;
+  border-radius: var(--radius-full) !important;
+  padding: 3px var(--space-3) !important;
+}
+
+/* ── 6 個 Bootstrap 原生 badge 色 ── */
+.badge.bg-primary {
+  background-color: var(--color-primary-light) !important;
+  color: var(--color-primary) !important;
+  border: 1px solid var(--color-blue-200) !important;       /* 淡藍框線 */
+}
+.badge.bg-secondary {
+  background-color: var(--color-secondary-light) !important;
+  color: var(--color-secondary-hover) !important;
+  border: 1px solid var(--color-blue-200) !important;
+}
+.badge.bg-success {
+  background-color: var(--color-success-bg) !important;
+  color: var(--color-success-hover) !important;
+  border: 1px solid var(--color-green-200) !important;      /* 淡綠框線 */
+}
+.badge.bg-warning {
+  background-color: var(--color-warning-bg) !important;
+  color: var(--color-warning-hover) !important;
+  border: 1px solid var(--color-amber-200) !important;      /* 淡黃框線 */
+}
+.badge.bg-danger {
+  background-color: var(--color-danger-bg) !important;
+  color: var(--color-danger) !important;
+  border: 1px solid var(--color-red-200) !important;        /* 淡紅框線 */
+}
+.badge.bg-info {
+  background-color: var(--color-info-bg) !important;
+  color: var(--color-info-hover) !important;
+  border: 1px solid var(--color-teal-200) !important;       /* 淡青綠框線 */
+}
+
+/* ── 4 個擴充 badge 色 ──
+   用法：<span class="badge bg-purple">審核中</span>  */
+.badge.bg-purple {
+  background-color: var(--color-purple-bg) !important;
+  color: var(--color-purple-hover) !important;
+  border: 1px solid var(--color-purple-200) !important;
+}
+.badge.bg-teal {
+  background-color: var(--color-teal-bg) !important;
+  color: var(--color-teal-hover) !important;
+  border: 1px solid var(--color-teal-200) !important;
+}
+.badge.bg-orange {
+  background-color: var(--color-orange-bg) !important;
+  color: var(--color-orange-hover) !important;
+  border: 1px solid var(--color-orange-200) !important;
+}
+.badge.bg-gray {
+  background-color: var(--color-bg-sunken) !important;
+  color: var(--color-text-secondary) !important;
+  border: 1px solid var(--color-gray-300) !important;
+}
+
+/* ── accent badge（Sandy Clay，視覺裝飾用）── */
+.badge.bg-accent {
+  background-color: var(--color-accent-light) !important;
+  color: var(--color-accent-hover) !important;
+  border: 1px solid var(--color-sandy-200) !important;
+}
+
+
+/* ================================================================
+   其他元件選擇器覆寫（Scoped Overrides）
+   ================================================================ */
+
+/* ── <code> 標籤顏色
+   Bootstrap 預設為粉紅色，覆寫為主色藍。
+   base.css 刪掉後這裡確保 <code> 不會顯示粉紅色。  */
+code {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 0.875em;
+}
+
+/* ── 表格 thead ── */
+.table thead th {
+  background-color: var(--color-gray-100) !important;
+  color: var(--color-text-secondary) !important;
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ── 表格 tbody hover ── */
+.table-hover > tbody > tr:hover > * {
+  background-color: var(--color-primary-light);
+  color: var(--color-text-primary);
+}
+
+/* ── 輸入框 focus ── */
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px rgba(1, 80, 173, 0.15);
+  outline: none;
+}
+
+/* ── Checkbox / Radio 選中色 ── */
+.form-check-input:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ── Modal 標題 ── */
+.modal-title {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--color-text-primary);
+}
+
+/* ── Navbar active 底線 ── */
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:focus-visible {
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+}
+
+/* ── Alert primary ── */
+.alert-primary {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-border-light);
+  color: var(--color-primary-hover);
+}
+
+/* ================================================================
+   Typography — 標題樣式 | 2026.05.07補充
+   ================================================================ */
+
+h1, .h1 {
+  font-size: var(--text-4xl);     /* 36px */
+  font-weight: var(--font-bold);  /* 700 */
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+}
+
+h2, .h2 {
+  font-size: var(--text-3xl);     /* 30px */
+  font-weight: var(--font-bold);  /* 700 */
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+}
+
+h3, .h3 {
+  font-size: var(--text-2xl);      /* 24px */
+  font-weight: var(--font-semibold); /* 600 */
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+}
+
+h4, .h4 {
+  font-size: var(--text-xl);       /* 20px */
+  font-weight: var(--font-semibold); /* 600 */
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+}
+
+h5, .h5 {
+  font-size: var(--text-lg);       /* 18px */
+  font-weight: var(--font-semibold); /* 600 */
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+}
+
+h6, .h6 {
+  font-size: var(--text-base);     /* 16px */
+  font-weight: var(--font-semibold); /* 600 */
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+}
+
+/* 輔助文字類別 */
+.text-lead {
+  font-size: var(--text-lg);       /* 18px */
+  font-weight: var(--font-normal); /* 400 */
+  color: var(--color-text-secondary);
+}
+
+.text-small {
+  font-size: var(--text-sm);       /* 14px */
+  font-weight: var(--font-normal); /* 400 */
+}
+
+.text-caption {
+  font-size: var(--text-xs);       /* 12px */
+  font-weight: var(--font-normal); /* 400 */
+  color: var(--color-text-muted);
+}

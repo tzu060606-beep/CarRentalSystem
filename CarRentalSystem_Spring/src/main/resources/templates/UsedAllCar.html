@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>二手車管理系統</title>
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<style>
+		.loading {
+			color: blue;
+			font-weight: bold;
+		}
+
+		.car-table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 20px;
+			font-size: 14px;
+		}
+
+		.car-table th,
+		.car-table td {
+			border: 1px solid #ddd;
+			padding: 10px;
+			text-align: left;
+		}
+
+		.car-table th {
+			background-color: #f4f4f4;
+			white-space: nowrap;
+		}
+
+		.car-table tr:hover {
+			background-color: #f9f9f9;
+		}
+
+		.btn-delete {
+			background-color: #ff4d4d;
+			color: white;
+			border: none;
+			padding: 5px 10px;
+			cursor: pointer;
+			border-radius: 4px;
+		}
+
+		.btn-delete:hover {
+			background-color: #cc0000;
+		}
+
+		.photo-preview {
+			width: 50px;
+			height: auto;
+			border-radius: 4px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app" th:inline="none">
+		<h2>🚗 二手車庫存資料</h2>
+
+		<button @click="fetchCars" :disabled="loading">
+			{{ loading ? '讀取中...' : '重新整理資料' }}
+		</button>
+		<span v-if="loading" class="loading"> 正在連線後端伺服器...</span>
+
+		<table class="car-table">
+			<thead>
+				<tr>
+					<th>編號</th>
+					<th>原編號</th>
+					<th>預售價格</th>
+					<th>車況描述</th>
+					<th>照片</th>
+					<th>上架日</th>
+					<th>截止日</th>
+					<th>狀態</th>
+					<th>車牌</th>
+					<th>品牌</th>
+					<th>型號</th>
+					<th>車型</th>
+					<th>座位</th>
+					<th>顏色</th>
+					<th>燃油</th>
+					<th>變速</th>
+					<th>出廠日</th>
+					<th>里程</th>
+					<th>建立時間</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-if="carList.length === 0 && !loading">
+					<td colspan="20" style="text-align: center;">目前無任何車輛資料</td>
+				</tr>
+
+				<tr v-for="car in carList" :key="car.usedcar_id">
+					<td>{{ car.usedcar_id }}</td>
+					<td>{{ car.vehicle_id }}</td>
+					<td style="color: green; font-weight: bold;">${{ car.asking_price }}</td>
+					<td>{{ car.condition_desc }}</td>
+					<td>
+						<img v-if="car.photos" :src="car.photos" class="photo-preview" alt="車照">
+						<span v-else>無圖</span>
+					</td>
+					<td>{{ car.list_date }}</td>
+					<td>{{ car.expire_date }}</td>
+					<td>{{ car.status }}</td>
+					<td>{{ car.plate_no }}</td>
+					<td>{{ car.brand }}</td>
+					<td>{{ car.model }}</td>
+					<td>{{ car.vehicle_type }}</td>
+					<td>{{ car.seats }}</td>
+					<td>{{ car.color }}</td>
+					<td>{{ car.fuel_type }}</td>
+					<td>{{ car.transmission }}</td>
+					<td>{{ car.manufacture_date }}</td>
+					<td>{{ car.mileage }} km</td>
+					<td>{{ car.created_time }}</td>
+					<td>
+						<button class="btn-delete" @click="deleteCar(car.usedcar_id)">刪除</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div style="margin-top: 20px;">
+			<h3>📊 統計資訊：共 {{ carList.length }} 筆車輛資料</h3>
+		</div>
+	</div>
+
+	<script>
+		const { createApp } = Vue;
+
+		createApp({
+			data() {
+				return {
+					carList: [],
+					loading: false
+				}
+			},
+			methods: {
+				// 抓取後端 JSON 資料
+				fetchCars() {
+					this.loading = true;
+					// 請確認後端 RestController 的路徑是 /api/used-cars
+					axios.get('/usedcargetall.controller')
+						.then(res => {
+							this.carList = res.data;
+							console.log("資料加載成功", res.data);
+						})
+						.catch(err => {
+							console.error(err);
+							alert('無法連線至後端 API，請檢查後端是否啟動');
+						})
+						.finally(() => this.loading = false);
+				},
+				// 刪除資料
+				deleteCar(id) {
+					if (confirm(`確定要刪除編號 ${id} 的車輛嗎？`)) {
+						axios.delete(`/api/used-cars/${id}`)
+							.then(res => {
+								alert('刪除成功！');
+								this.fetchCars(); // 重新整理列表
+							})
+							.catch(err => {
+								alert('刪除失敗，請檢查權限或後端關聯');
+							});
+					}
+				}
+			},
+			mounted() {
+				// 初始化載入
+				this.fetchCars();
+			}
+		}).mount('#app');
+	</script>
+</body>
+
+</html>

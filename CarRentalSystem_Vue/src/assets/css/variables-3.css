@@ -1,0 +1,308 @@
+/*
+ * variables-3.css
+ * OneRent 設計系統 — 全域 CSS 變數
+ * 依據 OneRent CIS 品牌識別系統 v1.0 制定
+ *
+ * ⚠️ 規則：
+ *   - 全專案唯一的 :root，任何人不得在其他檔案新增 :root {}
+ *   - 寫 CSS 時請優先使用「FUNCTIONAL COLORS」區塊的語意變數
+ *   - 需要新增變數請在這裡統一定義，並告知其他組員
+ *   - 模組若需要額外狀態色，在本檔案下方「擴充狀態色」區塊新增
+ * ================================================================ */
+
+:root {
+
+  /* ============================================================
+     BASE COLORS（色票層）
+     這層只是原始色值，組員寫 CSS 時請用下方的 FUNCTIONAL COLORS，
+     不要直接引用這裡的變數，語意才會清楚。
+     ============================================================ */
+
+  /* Blue（Sapphire 藍色系）
+     600 = Sapphire #0150AD（品牌主色 primary）
+     400 = #60A5FA（品牌次色 secondary，和主色有明顯區隔） */
+  --color-blue-100: #DAEBFC;   /* Alice Blue */
+  --color-blue-200: #BFDBFE;
+  --color-blue-300: #93C5FD;
+  --color-blue-400: #60A5FA;   /* 品牌次色 secondary */
+  --color-blue-500: #0074D6;
+  --color-blue-600: #0150AD;   /* Sapphire — 品牌主色 primary */
+  --color-blue-700: #003d80;
+  --color-blue-800: #002a5c;
+  --color-blue-900: #0B1A30;   /* 深色背景、遮罩 */
+
+  /* Sandy Clay（品牌輔助暖色 accent）
+     600 = Sandy Clay #DBA772                          */
+  --color-sandy-100: #FCE7D5;  /* Almond Cream */
+  --color-sandy-200: #F5D0B0;
+  --color-sandy-300: #EDBA8A;
+  --color-sandy-400: #E3A870;
+  --color-sandy-500: #D99558;
+  --color-sandy-600: #DBA772;  /* Sandy Clay — 品牌輔助暖色 accent */
+  --color-sandy-700: #C08A55;
+  --color-sandy-800: #A06B38;
+
+  /* Green（成功綠）                                   */
+  --color-green-100: #DCFCE7;
+  --color-green-200: #BBF7D0;
+  --color-green-300: #86EFAC;
+  --color-green-400: #4ADE80;
+  --color-green-500: #22C55E;
+  --color-green-600: #16A34A;
+  --color-green-700: #15803D;
+  --color-green-800: #107b37;
+
+  /* Amber（警告黃）
+     純黃色系，視覺上與 Sandy Clay 橘棕色明確區隔。   */
+  --color-amber-100: #FEF9C3;
+  --color-amber-200: #FEF08A;
+  --color-amber-300: #FDE047;
+  --color-amber-400: #FACC15;
+  --color-amber-500: #EAB308;
+  --color-amber-600: #CA8A04;
+  --color-amber-700: #A16207;
+  --color-amber-800: #854D0E;
+
+  /* Red（危險紅）                                     */
+  --color-red-100: #FFD6D6;
+  --color-red-200: #FFB3B3;
+  --color-red-300: #FF8080;
+  --color-red-400: #FF4040;
+  --color-red-500: #FF0624;
+  --color-red-600: #D90020;
+  --color-red-700: #B61913;
+  --color-red-800: #8C1010;
+
+  /* Purple（紫色 — 審核中、待審）                     */
+  --color-purple-100: #EDE9FE;
+  --color-purple-200: #DDD6FE;
+  --color-purple-300: #C4B5FD;
+  --color-purple-400: #A78BFA;
+  --color-purple-500: #8B5CF6;
+  --color-purple-600: #7C3AED;
+  --color-purple-700: #6D28D9;
+  --color-purple-800: #5B21B6;
+
+  /* Teal（青綠 — 取車中 / 資訊色 info）               */
+  --color-teal-100: #CCFBF1;
+  --color-teal-200: #99F6E4;
+  --color-teal-300: #5EEAD4;
+  --color-teal-400: #2DD4BF;
+  --color-teal-500: #14B8A6;
+  --color-teal-600: #0D9488;
+  --color-teal-700: #0F766E;
+  --color-teal-800: #115E59;
+
+  /* Orange（橘色 — 逾期、催繳）                       */
+  --color-orange-100: #FFEDD5;
+  --color-orange-200: #FED7AA;
+  --color-orange-300: #FDBA74;
+  --color-orange-400: #FB923C;
+  --color-orange-500: #F97316;
+  --color-orange-600: #EA580C;
+  --color-orange-700: #C2410C;
+  --color-orange-800: #9A3412;
+
+  /* Gray（中性灰）                                    */
+  --color-gray-50:  #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+
+  /* White / Black                                     */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+
+  /* ============================================================
+     FUNCTIONAL COLORS（功能型語意變數）
+     組員寫 CSS 時應該用這裡的變數，語意清楚，
+     改品牌色只需改上方色票，這裡自動跟著變。
+     ============================================================ */
+
+  /* ── 品牌主色 primary（Sapphire 藍 #0150AD）── */
+  --color-primary:              var(--color-blue-600);
+  --color-primary-hover:        var(--color-blue-700);
+  --color-primary-active:       var(--color-blue-800);
+  --color-primary-light:        var(--color-blue-100);
+  --color-primary-border:       var(--color-blue-600);
+  --color-primary-border-light: var(--color-blue-200);
+
+  /* ── 品牌次色 secondary（淺藍 #60A5FA）──
+     和主色同色系但明顯較淺，用於次要按鈕、輔助強調。 */
+  --color-secondary:            var(--color-blue-400);
+  --color-secondary-hover:      var(--color-blue-500);
+  --color-secondary-active:     var(--color-blue-600);
+  --color-secondary-light:      var(--color-blue-100);
+  --color-secondary-border:     var(--color-blue-400);
+
+  /* ── 品牌輔助暖色 accent（Sandy Clay #DBA772）──
+     用於點綴、圖示、漸層等視覺裝飾，
+     不用於表示「危險」或「警告」等語意狀態。        */
+  --color-accent:               var(--color-sandy-600);
+  --color-accent-hover:         var(--color-sandy-700);
+  --color-accent-active:        var(--color-sandy-800);
+  --color-accent-light:         var(--color-sandy-100);
+  --color-accent-border:        var(--color-sandy-600);
+
+  /* ── 語意：成功 ── */
+  --color-success:              var(--color-green-600);
+  --color-success-hover:        var(--color-green-700);
+  --color-success-bg:           var(--color-green-100);
+
+  /* ── 語意：警告（純黃，與 Sandy Clay 明確區隔）── */
+  --color-warning:              var(--color-amber-500);
+  --color-warning-hover:        var(--color-amber-700);
+  --color-warning-bg:           var(--color-amber-100);
+
+  /* ── 語意：危險/錯誤 ── */
+  --color-danger:               var(--color-red-600);
+  --color-danger-hover:         var(--color-red-700);
+  --color-danger-bg:            var(--color-red-100);
+
+  /* ── 語意：資訊（改用 Teal 青綠，和主色藍明確區隔）── */
+  --color-info:                 var(--color-teal-600);
+  --color-info-hover:           var(--color-teal-700);
+  --color-info-bg:              var(--color-teal-100);
+
+  /* ── 擴充狀態色（badge 專用）── */
+  --color-purple:               var(--color-purple-600);
+  --color-purple-hover:         var(--color-purple-700);
+  --color-purple-bg:            var(--color-purple-100);
+
+  --color-teal:                 var(--color-teal-600);
+  --color-teal-hover:           var(--color-teal-700);
+  --color-teal-bg:              var(--color-teal-100);
+
+  --color-orange:               var(--color-orange-600);
+  --color-orange-hover:         var(--color-orange-700);
+  --color-orange-bg:            var(--color-orange-100);
+
+  /* ── 文字 ── */
+  --color-text-primary:         var(--color-gray-900);
+  --color-text-secondary:       var(--color-gray-600);
+  --color-text-muted:           var(--color-gray-400);
+  --color-text-inverse:         var(--color-white);
+  --color-text-link:            var(--color-blue-600);
+  --color-text-link-hover:      var(--color-blue-700);
+
+  /* ── 背景 ── */
+  --color-bg-page:              var(--color-gray-50);
+  --color-bg-surface:           var(--color-white);
+  --color-bg-sunken:            var(--color-gray-100);
+  --color-bg-overlay:           rgba(11, 26, 48, 0.5);
+
+  /* ── 邊框 ── */
+  --color-border:               var(--color-gray-200);
+  --color-border-strong:        var(--color-gray-300);
+  --color-border-focus:         var(--color-blue-600);
+
+
+  /* ============================================================
+     TYPOGRAPHY
+     ============================================================ */
+
+  --font-sans: 'Noto Sans TC', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --text-xs:   0.75rem;    /* 12px */
+  --text-sm:   0.875rem;   /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg:   1.125rem;   /* 18px */
+  --text-xl:   1.25rem;    /* 20px */
+  --text-2xl:  1.5rem;     /* 24px */
+  --text-3xl:  1.875rem;   /* 30px */
+  --text-4xl:  2.25rem;    /* 36px */
+
+  --font-normal:   400;
+  --font-medium:   500;
+  --font-semibold: 600;
+  --font-bold:     700;
+
+  --leading-tight:  1.25;
+  --leading-normal: 1.6;
+  --leading-loose:  1.8;
+
+
+  /* ============================================================
+     SPACING
+     ============================================================ */
+
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+
+  /* ============================================================
+     RADIUS
+     ============================================================ */
+
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+
+  /* ============================================================
+     SHADOW
+     ============================================================ */
+
+  --shadow-sm: 0 1px 4px  rgba(1, 80, 173, 0.08);
+  --shadow-md: 0 4px 16px rgba(1, 80, 173, 0.14);
+  --shadow-lg: 0 8px 32px rgba(1, 80, 173, 0.18);
+  --shadow-xl: 0 16px 48px rgba(1, 80, 173, 0.22);
+
+
+  /* ============================================================
+     TRANSITION
+     ============================================================ */
+
+  --transition-fast:   150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow:   400ms ease;
+
+
+  /* ============================================================
+     LAYOUT
+     ============================================================ */
+
+  --navbar-height:     64px;
+  --container-max:     1200px;
+  --container-padding: var(--space-6);
+
+ /* ============================================================
+     Z-INDEX 層級管理
+     ============================================================ */
+
+--z-index-dropdown:1000;
+--z-index-sticky:1020;
+--z-index-navbar:1030;
+--z-index-modal:1050;
+--z-index-tooltip:1080;
+
+/* 這個是用來做選單或彈窗的時候可以套用讓層級比較好調的變數 */
+
+  /* ============================================================
+     擴充狀態色區塊
+     若模組需要額外的狀態色，請在此區塊新增，格式如下：
+     --color-{名稱}:       var(--color-xxx-600);
+     --color-{名稱}-hover: var(--color-xxx-700);
+     --color-{名稱}-bg:    var(--color-xxx-100);
+     並在 bootstrap-bridge-3.css 的擴充 Badge 區塊補上對應規則。
+     ============================================================ */
+
+}

@@ -1,0 +1,61 @@
+# 1. Maven 產出物
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+*.jar
+*.war
+
+# 2. 開發工具/IDE 特有檔案 (防干擾)
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# 3. 作業系統隱藏檔 (跨平台必備)
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# 4. 安全性與日誌
+*.log
+settings.xml
+application-local.properties
+
+src/main/resources/application.properties
+/.apt_generated_tests/
+
+#防vscode
+.vscode/
+
+#防metadata
+.metadata/
+
+
+#5. 上傳的使用者檔案不應進版控
+uploads/
+
+# 環境變數檔案
+.env
+.env.local
